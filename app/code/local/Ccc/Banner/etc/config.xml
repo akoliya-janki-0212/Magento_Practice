@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ccc_Banner>
+            <version>0.1.0</version>
+        </Ccc_Banner>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Ccc_Banner after="Mage_Adminhtml">Ccc_Banner_Adminhtml</Ccc_Banner>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <menu>
+            <ccc_banner translate="title" module="adminhtml">
+                <title>Banner</title>
+                <sort_order>100</sort_order>
+                <children>
+                    <banner_items translate="title" module="adminhtml">
+                        <title>Manage Banners</title>
+                        <action>adminhtml/banner/index</action>
+                        <sort_order>10</sort_order>
+                    </banner_items>
+                </children>
+            </ccc_banner>
+        </menu>
+    </adminhtml>
+    <global>
+        <blocks>
+            <banner>
+                <class>Ccc_Banner_Block</class>
+            </banner>
+        </blocks>
+    </global>
+</config>

@@ -8,20 +8,20 @@
     </modules>
     <frontend>
         <routers>
-            <test>
+            <ccc_test>
                 <use>standard</use>
                 <args>
                     <module>Ccc_Test</module>
                     <frontName>demo</frontName>
                 </args>
-            </test>
+            </ccc_test>
         </routers>
     </frontend>
     <global>
         <models>
-            <test>
+            <ccc_test>
                 <class>Ccc_Test_Model</class>
-            </test>
+            </ccc_test>
         </models>
     </global>
 </config>
