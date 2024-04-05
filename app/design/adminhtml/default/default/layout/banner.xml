@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<layout version="0.1.0">
-    <adminhtml_banner_index>
-        <reference name="content">
-            <block type="banner/adminhtml_banner_grid" name="banner_grid" />
-        </reference>
-    </adminhtml_banner_index>
-</layout>

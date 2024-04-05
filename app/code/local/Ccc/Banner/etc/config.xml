@@ -10,7 +10,7 @@
             <adminhtml>
                 <args>
                     <modules>
-                        <Ccc_Banner after="Mage_Adminhtml">Ccc_Banner_Adminhtml</Ccc_Banner>
+                        <Ccc_Banner before="Mage_Adminhtml">Ccc_Banner_Adminhtml</Ccc_Banner>
                     </modules>
                 </args>
             </adminhtml>
@@ -18,11 +18,11 @@
     </admin>
     <adminhtml>
         <menu>
-            <ccc_banner translate="title" module="adminhtml">
+            <ccc_banner translate="title" module="banner">
                 <title>Banner</title>
                 <sort_order>100</sort_order>
                 <children>
-                    <banner_items translate="title" module="adminhtml">
+                    <banner_items translate="title" module="banner">
                         <title>Manage Banners</title>
                         <action>adminhtml/banner/index</action>
                         <sort_order>10</sort_order>
@@ -30,6 +30,13 @@
                 </children>
             </ccc_banner>
         </menu>
+        <layout>
+            <updates>
+                <ccc_banner>
+                    <file>ccc_banner.xml</file>
+                </ccc_banner>
+            </updates>
+        </layout>
     </adminhtml>
     <global>
         <blocks>
@@ -37,5 +44,35 @@
                 <class>Ccc_Banner_Block</class>
             </banner>
         </blocks>
+
+        <models>
+            <ccc_banner>
+                <class>Ccc_Banner_Model</class>
+                <resourceModel>ccc_banner_resource</resourceModel>
+            </ccc_banner>
+            <ccc_banner_resource>
+                <class>Ccc_Banner_Model_Resource</class>
+                <entities>
+                    <banner>
+                        <table>ccc_banner</table>
+                    </banner>
+                </entities>
+            </ccc_banner_resource>
+        </models>
+        <resources>
+            <banner_setup>
+                <setup>
+                    <module>Ccc_Banner</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </banner_setup>
+        </resources>
+        <helpers>
+            <banner>
+                <class>Ccc_Banner_Helper</class>
+            </banner>
+        </helpers>
     </global>
 </config>

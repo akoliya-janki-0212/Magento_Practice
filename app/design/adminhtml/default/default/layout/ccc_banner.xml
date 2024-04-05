@@ -30,8 +30,17 @@
     <!-- Catalog Price Rule -->
     <adminhtml_banner_index>
         <reference name="content">
-            <block type="adminhtml/promo_catalog" name="promo_catalog" />
+            <block type="banner/adminhtml_banner" name="banner" />
         </reference>
     </adminhtml_banner_index>
+    <adminhtml_banner_new>
+        <update handle="adminhtml_banner_edit" />
+    </adminhtml_banner_new>
+    <adminhtml_banner_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="banner/adminhtml_banner_edit" name="banner_edit"></block>
+        </reference>
+    </adminhtml_banner_edit>
 </layout>
     

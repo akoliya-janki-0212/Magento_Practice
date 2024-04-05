@@ -3,7 +3,7 @@ class Ccc_Banner_Model_Resource_Banner_Collection extends Mage_Core_Model_Resour
 {
     protected function _construct()
     {
-        $this->_init('banner/banner');
+        $this->_init('ccc_banner/banner');
     }
 }
 ?>

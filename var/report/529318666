@@ -1,0 +1,9 @@
+a:5:{i:0;s:144:"Error in file: "C:\xampp\htdocs\Magento\app\code\local\Ccc\Banner\sql\banner_setup\install-0.1.0.php" - Can't retrieve entity config: ccc/banner";i:1;s:940:"#0 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\Resource\Setup.php(644): Mage::exception('Mage_Core', 'Error in file: ...')
+#1 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\Resource\Setup.php(421): Mage_Core_Model_Resource_Setup->_modifyResourceDb('install', '', '0.1.0')
+#2 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\Resource\Setup.php(327): Mage_Core_Model_Resource_Setup->_installResourceDb('0.1.0')
+#3 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\Resource\Setup.php(235): Mage_Core_Model_Resource_Setup->applyUpdates()
+#4 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\App.php(428): Mage_Core_Model_Resource_Setup::applyAllUpdates()
+#5 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\App.php(354): Mage_Core_Model_App->_initModules()
+#6 C:\xampp\htdocs\Magento\app\Mage.php(686): Mage_Core_Model_App->run(Array)
+#7 C:\xampp\htdocs\Magento\index.php(83): Mage::run('', 'store')
+#8 {main}";s:3:"url";s:75:"/Magento/index.php/admin/banner/index/key/d2865c87f5c4861aab1383b19ccf3fd5/";s:11:"script_name";s:18:"/Magento/index.php";s:4:"skin";s:7:"default";}
