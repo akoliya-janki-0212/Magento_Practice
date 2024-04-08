@@ -1,0 +1,15 @@
+<config>
+    <menu>
+        <ccc_banner translate="title" module="banner">
+            <title>Banner</title>
+            <sort_order>100</sort_order>
+            <children>
+                <banner translate="title" module="banner">
+                    <title>Manage Banners</title>
+                    <action>adminhtml/banner/index</action>
+                    <sort_order>10</sort_order>
+                </banner>
+            </children>
+        </ccc_banner>
+    </menu>
+</config>

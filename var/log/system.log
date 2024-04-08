@@ -1,0 +1,8 @@
+2024-04-05T08:55:14+00:00 DEBUG (7): HEADERS ALREADY SENT: \<pre>[0] C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Controller\Response\Http.php:52
+[1] C:\xampp\htdocs\Magento\lib\Zend\Controller\Response\Abstract.php:768
+[2] C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Controller\Response\Http.php:84
+[3] C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Controller\Varien\Front.php:184
+[4] C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\App.php:365
+[5] C:\xampp\htdocs\Magento\app\Mage.php:686
+[6] C:\xampp\htdocs\Magento\index.php:83
+\</pre>

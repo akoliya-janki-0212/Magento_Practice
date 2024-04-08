@@ -17,27 +17,14 @@
         </routers>
     </admin>
     <adminhtml>
-        <menu>
-            <ccc_banner translate="title" module="banner">
-                <title>Banner</title>
-                <sort_order>100</sort_order>
-                <children>
-                    <banner_items translate="title" module="banner">
-                        <title>Manage Banners</title>
-                        <action>adminhtml/banner/index</action>
-                        <sort_order>10</sort_order>
-                    </banner_items>
-                </children>
+    <layout>
+        <updates>
+            <ccc_banner>
+                <file>ccc_banner.xml</file>
             </ccc_banner>
-        </menu>
-        <layout>
-            <updates>
-                <ccc_banner>
-                    <file>ccc_banner.xml</file>
-                </ccc_banner>
-            </updates>
-        </layout>
-    </adminhtml>
+        </updates>
+    </layout>
+</adminhtml>
     <global>
         <blocks>
             <banner>

@@ -9,7 +9,7 @@ class Ccc_Banner_Block_Adminhtml_Banner_Edit_Form extends Mage_Adminhtml_Block_W
         parent::__construct();
         $this->setId('banner_form');
         $this->setTitle(Mage::helper('banner')->__('Banner Information'));
-        $this->setData('action', $this->getUrl('*/*/save'));
+        $this->setData('banner_form', $this->getUrl('*/*/save'));
     }
 
     /**
@@ -26,27 +26,30 @@ class Ccc_Banner_Block_Adminhtml_Banner_Edit_Form extends Mage_Adminhtml_Block_W
     protected function _prepareForm()
     {
         $model = Mage::registry('banner_block');
+        $isEdit = ($model && $model->getId());
 
         $form = new Varien_Data_Form(
-            array('id' => 'edit_form', 'action' => $this->getData('action'), 'method' => 'post')
+            array('id' => 'edit_form', 'action' => $this->getUrl('*/*/save'), 'method' => 'post', 'enctype' => 'multipart/form-data')
         );
 
-        $form->setHtmlIdPrefix('banner_');
+        $form->setHtmlIdPrefix('block_');
+
 
         $fieldset = $form->addFieldset('base_fieldset', array('legend' => Mage::helper('banner')->__('General Information'), 'class' => 'fieldset-wide'));
 
-        if ($model->getBannerId()) {
+        if ($isEdit && $model->getBannerId()) {
             $fieldset->addField(
                 'banner_id',
                 'hidden',
                 array(
-                    'name' => 'banner id',
+                    'name' => 'banner_id',
                 )
             );
         }
 
+
         $fieldset->addField(
-            'name',
+            'banner_name',
             'text',
             array(
                 'name' => 'banner_name',
@@ -57,16 +60,32 @@ class Ccc_Banner_Block_Adminhtml_Banner_Edit_Form extends Mage_Adminhtml_Block_W
         );
 
         $fieldset->addField(
-            'image',
+            'banner_image',
             'file',
             array(
                 'name' => 'banner_image',
-                'label' => Mage::helper('banner')->__('Banner Image'),
-                'title' => Mage::helper('banner')->__('Banner Image'),
-                'required' => true,
+                'label' => Mage::helper('banner')->__('Banner image'),
+                'title' => Mage::helper('banner')->__('Banner image'),
+                // Remove 'required' attribute only in edit mode
+                'required' => !$isEdit,
             )
         );
 
+        // Add current image display if in edit mode
+        if ($isEdit) {
+            $currentImageUrl = $model->getBannerImage();
+            if ($currentImageUrl) {
+                $fieldset->addField(
+                    'current_image',
+                    'note',
+                    array(
+                        'label' => Mage::helper('banner')->__('Current Image'),
+                        'text' => '<img src="' . Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'banner/' . $currentImageUrl . '" height="200" />'
+
+                    )
+                );
+            }
+        }
 
         $fieldset->addField(
             'status',
@@ -74,7 +93,7 @@ class Ccc_Banner_Block_Adminhtml_Banner_Edit_Form extends Mage_Adminhtml_Block_W
             array(
                 'label' => Mage::helper('banner')->__('Status'),
                 'title' => Mage::helper('banner')->__('Status'),
-                'name' => 'is_active',
+                'name' => 'status',
                 'required' => true,
                 'options' => array(
                     '1' => Mage::helper('banner')->__('Enabled'),
@@ -82,9 +101,25 @@ class Ccc_Banner_Block_Adminhtml_Banner_Edit_Form extends Mage_Adminhtml_Block_W
                 ),
             )
         );
-        if (!$model->getId()) {
-            $model->setData('is_active', '1');
+        if (!($model->getId())) {
+            $model->setData('status', '1');
         }
+
+        $fieldset->addField(
+            'show_on',
+            'select',
+            array(
+                'label' => Mage::helper('banner')->__('Show ON'),
+                'title' => Mage::helper('banner')->__('Show ON'),
+                'name' => 'show_on',
+                'required' => true,
+                'options' => array(
+                    '1' => Mage::helper('banner')->__('1'),
+                    '0' => Mage::helper('banner')->__('0'),
+                ),
+            )
+        );
+
         $form->setValues($model->getData());
         $form->setUseContainer(true);
         $this->setForm($form);
