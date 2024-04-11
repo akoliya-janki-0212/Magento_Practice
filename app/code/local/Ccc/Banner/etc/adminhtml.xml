@@ -4,12 +4,71 @@
             <title>Banner</title>
             <sort_order>100</sort_order>
             <children>
-                <banner translate="title" module="banner">
+                <index translate="title" module="banner">
                     <title>Manage Banners</title>
                     <action>adminhtml/banner/index</action>
                     <sort_order>10</sort_order>
-                </banner>
+                </index>
             </children>
         </ccc_banner>
     </menu>
+      <acl>
+        <resources>
+            <admin>
+                <children>
+                    <ccc_banner translate="title" module="banner">
+                        <title>Banner</title>
+                        <children>
+                            <index translate="title">
+                                <title>Show Banner</title>
+                                <sort_order>10</sort_order>
+                            </index>
+                            <new translate="title">
+                                <title>Add Banner</title>
+                                <sort_order>10</sort_order>
+                            </new>
+                            <edit translate="title">
+                                <title>edit Banner</title>
+                                <sort_order>10</sort_order>
+                            </edit>
+                            <delete translate="title">
+                                <title>delete Banner</title>
+                                <sort_order>10</sort_order>
+                            </delete>
+                           <columns translate="title">
+                            <title>All Columns</title>
+                            <sort_order>10</sort_order>
+                            <children>
+                                <id translate="title">
+                                    <title>Banner Id</title>
+                                    <sort_order>10</sort_order>
+                                </id>
+                                <name translate="title">
+                                    <title>Banner Name</title>
+                                    <sort_order>10</sort_order>
+                                </name>
+                                <image translate="title">
+                                    <title>Banner Image</title>
+                                    <sort_order>10</sort_order>
+                                </image>
+                                <status translate="title">
+                                    <title>Status</title>
+                                    <sort_order>10</sort_order>
+                                </status>
+                                <showon translate="title">
+                                    <title>Show On</title>
+                                    <sort_order>10</sort_order>
+                                </showon>
+                            </children>
+                           </columns>
+                           <rows>
+                            <title>All Rows</title>
+                            <sort_order>10</sort_order>
+                           </rows>
+                        </children>
+                    </ccc_banner>
+                   </children>
+            </admin>
+        </resources>
+    </acl>
 </config>

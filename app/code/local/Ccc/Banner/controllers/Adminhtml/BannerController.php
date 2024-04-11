@@ -23,6 +23,28 @@ class Ccc_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Ac
         $this->_title($this->__('Manage_Banner'));
         $this->_initAction();
         $this->renderLayout();
+
+    }
+
+    protected function _isAllowed()
+    {
+        $action = strtolower($this->getRequest()->getActionName());
+        switch ($action) {
+            case 'new':
+                $aclResource = 'ccc_banner/new';
+                break;
+            case 'edit':
+                $aclResource = 'ccc_banner/edit';
+                break;
+            case 'delete':
+                $aclResource = 'ccc_banner/delete';
+                break;
+            default:
+                $aclResource = 'ccc_banner/index';
+                break;
+
+        }
+        return Mage::getSingleton('admin/session')->isAllowed($aclResource);
     }
 
     /* Create new CMS page
@@ -71,7 +93,7 @@ class Ccc_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Ac
 
         $this->_initAction()
             ->_addBreadcrumb($id ? Mage::helper('banner')->__('Edit Banner') : Mage::helper('banner')->__('New Banner'), $id ? Mage::helper('banner')->__('Edit Banner') : Mage::helper('banner')->__('New Banner'));
-            $this->renderLayout();
+        $this->renderLayout();
 
         //` $this->getLayout()->createBlock('banner/adminhtml_banner_edit')
         //     ->setData('action', $this->getUrl('*/*/save'));`

@@ -10,6 +10,9 @@ class Ccc_Banner_Block_Adminhtml_Banner_Edit extends Mage_Adminhtml_Block_Widget
 
         $this->_updateButton('save', 'label', Mage::helper('banner')->__('Save Banner'));
         $this->_updateButton('delete', 'label', Mage::helper('banner')->__('Delete Banner'));
+        if (!Mage::getSingleton('admin/session')->isAllowed('ccc_banner/delete')) {
+            $this->removeButton('delete');
+        }
 
         $this->_addButton('saveandcontinue', array(
             'label' => Mage::helper('banner')->__('Save and Continue Edit'),

@@ -1,0 +1,505 @@
+<config>
+	<tabs>
+        <rocketweb_tab>
+            <label>RocketWeb Extensions</label>
+            <sort_order>1005001</sort_order>
+        </rocketweb_tab>
+    </tabs>
+    <sections>
+        <rocketweb_googlebasefeedgenerator>
+        	<label>Google Base Feed Generator</label>
+            <tab>rocketweb_tab</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <settings translate="label">
+                    <label>Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <is_turned_on translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+                        </is_turned_on>
+                        
+                        <alternate_feed_dir translate="label">
+                            <label>Feed path</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[&#8226; Dir path to save the feed on disk.<br />&#8226; If is left empty, by default the feed is saved in var/rw_google_base/google_base_[Store Code].tsv<br />&#8226; Relative paths are calculated relative to Magento base dir. <br />&#8226; If the path is set here it should have enough permission for both web server user and cron user.]]></comment>
+                        </alternate_feed_dir>
+                        
+                        <generate_feed translate="label">
+                            <label></label>
+                            <button_label>Generate Feed Now</button_label>
+                            <button_url><![CDATA[googlebasefeedgenerator_admin/adminhtml_googlebasefeedgenerator/generate]]></button_url>
+                            <frontend_model>googlebasefeedgenerator/adminhtml_system_config_updatebtn</frontend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </generate_feed>
+                        
+                        <test_btn translate="label">
+                            <label></label>
+                            <button_label>Test Feed Now</button_label>
+                            <button_url><![CDATA[googlebasefeedgenerator_admin/adminhtml_googlebasefeedgenerator/generate]]></button_url>
+                            <frontend_model>googlebasefeedgenerator/adminhtml_system_config_testbtn</frontend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[&#8226; It will generate a test feed. It's saved in the same location.<br />&#8226; Enter sku to test a single product.<br />&#8226; Use an offset and a limit to generate a test feed for a limited number of products.]]></comment>
+                        </test_btn>
+                        
+                        <product_types translate="label">
+                            <label>Submit only products of these types</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_producttypes</source_model>
+                            <sort_order>50</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Products submited to the feed have to be visible in Catalog.]]></comment>
+                        </product_types>
+                        
+						<use_batch_segmentation translate="label">
+                            <label>Use Batch Segmentation (Experimental)</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Recommended for catalogs with tens of thousands of products.<br />The generator will use a limited number of products to be executed multiple times until it completes the job.]]></comment>
+                        </use_batch_segmentation>
+                        
+                        <batch_limit translate="label">
+                            <label>Batch Limit</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Max number of products to be processed in a single cron job.<br />It depends on the number of products in catalog and the desired ussage of memory.]]></comment>
+		                    <depends><use_batch_segmentation>1</use_batch_segmentation></depends>
+		                    <frontend_class>validate-greater-than-zero</frontend_class>
+                        </batch_limit>
+                        
+                        <submit_no_img>
+                        	<label>Submit Products Without Images</label>
+                        	<frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>80</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+                        </submit_no_img>
+                        
+                        <force_log translate="label">
+                            <label>Force Logging</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>200</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+                        </force_log>
+                        
+                        <log_skip translate="label">
+                            <label>Log skip products messages</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>210</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+                        </log_skip>
+                    </fields>
+                </settings>
+                
+                <columns>
+                	<label>Feed Columns</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[Your Google Base Products Feed depends on your store configuration, types of products, available data stored in your products and others. Please carefully read <a target="_blank" href="http://www.google.com/support/merchants/bin/answer.py?hl=en&answer=188494#other">Google Base Specifications</a> to configure this extension properly.<br /><br /><br />]]></comment>
+                	<fields>
+                		<map_product_columns translate="label comment">
+                            <label>Feed's Columns Map</label>
+                            <frontend_model>googlebasefeedgenerator/adminhtml_system_config_form_field_mapproductcolumns</frontend_model>
+                            <backend_model>googlebasefeedgenerator/system_config_backend_serialized_mapproductcolumns</backend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[&#8226; If 'Static Value' is filled, it will always be used instead of 'Product Attribute'. Otherwise, the 'Default Value' of catalog product attributes could be used.<br />&#8226; Accepted values for 'availability': 'in stock', 'available for order', 'out of stock', 'preorder'<br />&#8226; e.g. for Google Category of the Item: 'Apparel & Accessories > Clothing > Dresses'<br />&#8226; e.g. for Google Base Product Type: 'Home & Garden > Kitchen & Dining > Appliances > Refrigerators' or 'Home & Garden'<br />&#8226; Accepted values for Condition: 'new', 'used', 'refurbished'<br />&#8226; Accepted values for gender: 'Male', 'Female', 'Unisex'<br />&#8226; Accepted values for age_group: 'Kids', 'Adult']]></comment>
+                        </map_product_columns>
+                        
+                        <ttl translate="label">
+                            <label>TTL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <frontend_class>validate-greater-than-zero</frontend_class>
+		                    <comment><![CDATA[Number of days. Used to set expiration date.]]></comment>
+                        </ttl>
+                        
+                        <id_store_code translate="label">
+                            <label>Add Store Code to Product Id</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[In multistore configuration ids must be unique across all feeds in your account. Set to 'Yes' will concatenate the product id and the store code. <a target="_blank" href="http://www.google.com/support/merchants/bin/answer.py?answer=188494#id">Read here</a><br />'Unique Identifier to Id' config option from store view config may be used also.]]></comment>
+                        </id_store_code>
+                        
+                        <id_add_store_unique translate="label">
+                            <label>Unique Identifier to Id</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>35</sort_order>
+		                    <show_in_default>0</show_in_default>
+		                    <show_in_website>0</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Adds text to ids instead of store code. Usually not required.<br />Use for a single account with multiple feeds from stores that may have same store code.<br />e.g. 2 Magento installs with 2 stores that have as store code [default]. Google Base Feed Specifications requires unique ids across all feeds in same account.]]></comment>
+		                    <depends><id_store_code>1</id_store_code></depends>
+                        </id_add_store_unique>
+                        
+                        <max_description_length translate="label">
+                            <label>Max Length of Description</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <frontend_class>validate-greater-than-zero</frontend_class>
+		                    <comment><![CDATA[Maximum length of description. Longer texts will be chunked. Recommended max length is 500-1000, but no longer than 10000. Set to empty, the description will not be chunked.]]></comment>
+                        </max_description_length>
+                        
+                        <add_to_product_url translate="label">
+                            <label>Add to Product URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Product URL will be concatenated with the text above. Can be used to track URLs. e.g. ?utm_source=froogle]]></comment>
+                        </add_to_product_url>
+                        
+                        <use_default_stock translate="label">
+                            <label>Use default Stock Statuses</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[To fill 'availability' with 'in stock' or 'out of stock', corresponding to product's stock status. If set to 'No', a valid product attribute is required.]]></comment>
+                        </use_default_stock>
+                        
+                        <stock_attribute_code translate="label">
+                            <label>Alternate Stock/Availability Attribute.</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_productattributescodes</source_model>
+                            <backend_model>googlebasefeedgenerator/system_config_backend_attributecode</backend_model>
+                            <sort_order>70</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[To fill 'availability'. The attribute's values can be: 'in stock', 'available for order', 'out of stock', 'preorder'. Other values will be replaced by 'out of stock'.]]></comment>
+		                    <depends><use_default_stock>0</use_default_stock></depends>
+                        </stock_attribute_code>
+                        
+                        <add_tax_to_price translate="label">
+                            <label>Add Tax to Price</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>80</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[For US, 'price' should not include tax.]]></comment>
+                        </add_tax_to_price>
+                        
+                        <manufacturer_attribute_code translate="label">
+                            <label>Manufacturer Attribute</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_productattributescodes</source_model>
+                            <backend_model>googlebasefeedgenerator/system_config_backend_attributecode</backend_model>
+                            <sort_order>90</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+                        </manufacturer_attribute_code>
+                        
+                        <weight_unit_measure translate="label">
+                            <label>Weight Unit of Measurement</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_weightunitmeasure</source_model>
+                            <sort_order>100</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+                        </weight_unit_measure>
+
+                        <payment_accepted translate="label">
+                            <label>Payments Accepted</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_paymentsaccepted</source_model>
+                            <sort_order>110</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+                        </payment_accepted>
+                        
+                        <google_product_category_by_category translate="label comment">
+                            <label>Google Product Category by Category</label>
+                            <frontend_model>googlebasefeedgenerator/adminhtml_system_config_form_field_mapcategory</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Values with empty order are matched last.<br />Values set here precedes 'Static Value' from 'Feed's Columns Map'.]]></comment>
+                        </google_product_category_by_category>
+                        
+                        <product_type_by_category translate="label comment">
+                            <label>Product Type by Category</label>
+                            <frontend_model>googlebasefeedgenerator/adminhtml_system_config_form_field_mapcategory</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Values with empty order are matched last.<br />Values set here precedes 'Static Value' from 'Feed's Columns Map'.]]></comment>
+                        </product_type_by_category>
+                        
+                        <map_replace_empty_columns translate="label comment">
+                            <label>Replace empty values</label>
+                            <frontend_model>googlebasefeedgenerator/adminhtml_system_config_form_field_mapemptycolumns</frontend_model>
+                            <backend_model>adminhtml/system_config_backend_serialized_array</backend_model>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Rules with empty order are processed last.<br />Columns must be in 'Feeds's Columns Map'.]]></comment>
+                        </map_replace_empty_columns>
+                        
+                        <skip_column_empty translate="label">
+                            <label>Skip Products with empty</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_feedcolumns</source_model>
+                            <sort_order>190</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Don't add products in the feed that have empty cells values for above columns.<br />Columns must be in 'Feeds's Columns Map'.]]></comment>
+                        </skip_column_empty>
+                        
+                        <skip_category translate="label">
+                            <label>Skip Products From Categories</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_category</source_model>
+                            <sort_order>200</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Don't add products in the feed from selected categories.]]></comment>
+                        </skip_category>
+                	</fields>
+                </columns>
+                
+                <apparel>
+                	<label>Apparels (Beta)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>150</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<a target="_blank" href="http://www.google.com/support/merchants/bin/answer.py?hl=en&answer=188494#other">Google Base Specifications - Apparels</a><br /><a target="_blank" href="http://www.google.com/support/merchants/bin/answer.py?answer=1347943">Google Base Specifications - Apparels Examples</a><br /><br />All apparel columns used must be added to 'Feed Columns' > 'Feed's Columns Map' too.<br />Apparel products are identified by Google Category of the Item: 'Apparel & Accessories' (including all subcategories).<br />Clothing products are identified by Google Category of the Item: 'Apparel & Accessories > Clothing' (including all subcategories).<br />Shoes products are identified by Google Category of the Item: 'Apparel & Accessories > Shoes' (including all subcategories).<br /><br /><br />]]></comment>
+                	<fields>
+                		<is_turned_on translate="label">
+                            <label>Enabled</label>
+                            <config_path>rocketweb_googlebasefeedgenerator/apparel/is_turned_on</config_path>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Products with Google Category: 'Apparel & Accessories' (including all subcategories) will be skipped if disabled.]]></comment>
+                        </is_turned_on>
+                        
+                        <submit_no_img>
+                        	<label>Submit Apparel Products Without Images</label>
+                        	<config_path>rocketweb_googlebasefeedgenerator/apparel/submit_no_img</config_path>
+                        	<frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Google Base Feed Specification states 'No'.]]></comment>
+                        </submit_no_img>
+                        
+                        <variants_submit_no_img>
+                        	<label>Submit Apparel Variants Without Images</label>
+                        	<config_path>rocketweb_googlebasefeedgenerator/apparel/variant_submit_no_img</config_path>
+                        	<frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Google Base Feed Specification states 'No'. Set to 'Yes' and there is no image available for an associated product it will use configurable's product image.]]></comment>
+                        </variants_submit_no_img>
+                        
+                        <for_us translate="label">
+                            <label>US Feed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Feeds for US have additional conditions applied to product data.]]></comment>
+                        </for_us>
+                        
+                        <age_group_attribute_code translate="label">
+                            <label>Age Group Attributes</label>
+                            <config_path>rocketweb_googlebasefeedgenerator/apparel/age_group_attribute_code</config_path>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_productattributescodes</source_model>
+                            <sort_order>50</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[To fill age_group. The attributes' values can be: 'Kids', 'Adult'. Other values will be replaced by empty string.]]></comment>
+                        </age_group_attribute_code>
+                        
+                        <gender_attribute_code translate="label">
+                            <label>Gender Attributes</label>
+                            <config_path>rocketweb_googlebasefeedgenerator/apparel/gender_attribute_code</config_path>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_productattributescodes</source_model>
+                            <sort_order>60</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[To fill gender. The attributes' values can be: 'Male', 'Female', 'Unisex'. Other values will be replaced by empty string.]]></comment>
+                        </gender_attribute_code>
+                	</fields>
+                </apparel>
+                
+                <apparel_no_variants>
+                	<label>Apparels non-variants (Beta)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                	<fields>
+                        <color_attribute_code translate="label">
+                            <label>Color Attributes</label>
+                            <config_path>rocketweb_googlebasefeedgenerator/apparel/color_attribute_code</config_path>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_productattributescodes</source_model>
+                            <sort_order>50</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+                        </color_attribute_code>
+                        
+                        <size_attribute_code translate="label">
+                            <label>Size Attributes</label>
+                            <config_path>rocketweb_googlebasefeedgenerator/apparel/size_attribute_code</config_path>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_productattributescodes</source_model>
+                            <sort_order>60</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Only for Google Categories of the Item 'Apparel & Accessories > Clothing' and 'Apparel & Accessories > Shoes']]></comment>
+                        </size_attribute_code>
+                	</fields>
+                </apparel_no_variants>
+                
+                <apparel_variants>
+                	<label>Apparels variants (Beta)</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>250</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[Variants are recommended to be used with <a href="#rocketweb_googlebasefeedgenerator_settings_product_types">Use Batch Segmentation</a>: 'Yes' to avoid high memory usage.<br />]]></comment>
+                	<fields>
+                        <variant_color_attribute_code translate="label">
+                            <label>Color Attributes (configurable)</label>
+                            <config_path>rocketweb_googlebasefeedgenerator/apparel/variant_color_attribute_code</config_path>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_productattributescodesconf</source_model>
+                            <sort_order>50</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+                        </variant_color_attribute_code>
+                        
+                        <variant_pattern_attribute_code translate="label">
+                            <label>Pattern Attributes (configurable)</label>
+                            <config_path>rocketweb_googlebasefeedgenerator/apparel/variant_pattern_attribute_code</config_path>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_productattributescodesconf</source_model>
+                            <sort_order>60</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+                        </variant_pattern_attribute_code>
+                        
+                        <variant_material_attribute_code translate="label">
+                            <label>Material Attributes (configurable)</label>
+                            <config_path>rocketweb_googlebasefeedgenerator/apparel/variant_material_attribute_code</config_path>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_productattributescodesconf</source_model>
+                            <sort_order>70</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+                        </variant_material_attribute_code>
+                        
+                        <variant_size_attribute_code translate="label">
+                            <label>Size Attributes (configurable)</label>
+                            <config_path>rocketweb_googlebasefeedgenerator/apparel/variant_size_attribute_code</config_path>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>googlebasefeedgenerator/source_productattributescodesconf</source_model>
+                            <sort_order>80</sort_order>
+		                    <show_in_default>1</show_in_default>
+		                    <show_in_website>1</show_in_website>
+		                    <show_in_store>1</show_in_store>
+		                    <comment><![CDATA[Only for Google Categories of the Item 'Apparel & Accessories > Clothing' and 'Apparel & Accessories > Shoes']]></comment>
+                        </variant_size_attribute_code>
+                	</fields>
+                </apparel_variants>
+            </groups>
+        </rocketweb_googlebasefeedgenerator>
+    </sections>
+</config>

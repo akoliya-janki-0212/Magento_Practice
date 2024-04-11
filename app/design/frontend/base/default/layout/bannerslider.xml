@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">	
+	<banner_master>
+		<reference name="content">
+			<action method="setTemplate"><template>bannerslider/view.phtml</template></action>
+			<block type="bannerslider/bannerslider" name="bannerslider" template="bannerslider/bannerslider.phtml">
+				<action method="setDisplay"><display>1</display>
+				</action>
+			</block>
+	</reference>
+	</banner_master>
+	<catalog_category_default>
+		<update handle="banner_master"></update>
+	</catalog_category_default>
+	<catalog_category_layered>
+		<update handle="banner_master"></update>
+	</catalog_category_layered>
+	<cms_index_index>
+		<update handle="banner_master"></update>
+		<reference name="bannerslider">
+			<action method="setDisplay"><display>0</display>
+			</action>
+		</reference>
+	</cms_index_index>
+</layout> 
