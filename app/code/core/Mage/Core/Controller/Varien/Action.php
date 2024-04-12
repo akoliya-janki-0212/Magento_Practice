@@ -581,10 +581,12 @@ abstract class Mage_Core_Controller_Varien_Action
     public function noCookiesAction()
     {
         $redirect = new Varien_Object();
-        Mage::dispatchEvent('controller_action_nocookies', array(
-            'action' => $this,
-            'redirect' => $redirect
-        )
+        Mage::dispatchEvent(
+            'controller_action_nocookies',
+            array(
+                'action' => $this,
+                'redirect' => $redirect
+            )
         );
 
         if ($url = $redirect->getRedirectUrl()) {

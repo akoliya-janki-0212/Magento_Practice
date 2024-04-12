@@ -3753,3 +3753,27 @@ Stack trace:
 #12 C:\xampp\htdocs\Magento\app\Mage.php(686): Mage_Core_Model_App->run(Array)
 #13 C:\xampp\htdocs\Magento\index.php(83): Mage::run('', 'store')
 #14 {main}
+2024-04-11T05:27:31+00:00 ERR (3): 
+Mage_Core_Model_Session_Exception in C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\Session\Abstract\Varien.php:431
+Stack trace:
+#0 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\Session\Abstract\Varien.php(236): Mage_Core_Model_Session_Abstract_Varien->validate()
+#1 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\Session\Abstract.php(84): Mage_Core_Model_Session_Abstract_Varien->init('reports', NULL)
+#2 C:\xampp\htdocs\Magento\app\code\core\Mage\Reports\Model\Session.php(43): Mage_Core_Model_Session_Abstract->init('reports')
+#3 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\Config.php(1357): Mage_Reports_Model_Session->__construct(Array)
+#4 C:\xampp\htdocs\Magento\app\Mage.php(466): Mage_Core_Model_Config->getModelInstance('reports/session', Array)
+#5 C:\xampp\htdocs\Magento\app\Mage.php(480): Mage::getModel('reports/session', Array)
+#6 C:\xampp\htdocs\Magento\app\code\core\Mage\Reports\Model\Product\Index\Abstract.php(167): Mage::getSingleton('reports/session')
+#7 C:\xampp\htdocs\Magento\app\code\core\Mage\Reports\Model\Product\Index\Abstract.php(185): Mage_Reports_Model_Product_Index_Abstract->_getSession()
+#8 C:\xampp\htdocs\Magento\app\code\core\Mage\Reports\Model\Event\Observer.php(148): Mage_Reports_Model_Product_Index_Abstract->calculate()
+#9 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\App.php(1358): Mage_Reports_Model_Event_Observer->catalogProductView(Object(Varien_Event_Observer))
+#10 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\App.php(1337): Mage_Core_Model_App->_callObserverMethod(Object(Mage_Reports_Model_Event_Observer), 'catalogProductV...', Object(Varien_Event_Observer))
+#11 C:\xampp\htdocs\Magento\app\Mage.php(451): Mage_Core_Model_App->dispatchEvent('catalog_control...', Array)
+#12 C:\xampp\htdocs\Magento\app\code\core\Mage\Catalog\Helper\Product\View.php(135): Mage::dispatchEvent('catalog_control...', Array)
+#13 C:\xampp\htdocs\Magento\app\code\core\Mage\Catalog\controllers\ProductController.php(132): Mage_Catalog_Helper_Product_View->prepareAndRender(404, Object(Mage_Catalog_ProductController), Object(Varien_Object))
+#14 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Controller\Varien\Action.php(415): Mage_Catalog_ProductController->viewAction()
+#15 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Controller\Varien\Router\Standard.php(254): Mage_Core_Controller_Varien_Action->dispatch('view')
+#16 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Controller\Varien\Front.php(172): Mage_Core_Controller_Varien_Router_Standard->match(Object(Mage_Core_Controller_Request_Http))
+#17 C:\xampp\htdocs\Magento\app\code\core\Mage\Core\Model\App.php(365): Mage_Core_Controller_Varien_Front->dispatch()
+#18 C:\xampp\htdocs\Magento\app\Mage.php(686): Mage_Core_Model_App->run(Array)
+#19 C:\xampp\htdocs\Magento\index.php(83): Mage::run('', 'store')
+#20 {main}

@@ -32,12 +32,18 @@
         <reference name="content">
             <block type="banner/adminhtml_banner" name="banner" />
         </reference>
+        <reference name="head">
+            <action method="addJs">
+                <script>banner/banner.js</script>
+            </action>
+        </reference>
+
     </adminhtml_banner_index>
     <adminhtml_banner_new>
         <update handle="adminhtml_banner_edit" />
     </adminhtml_banner_new>
     <adminhtml_banner_edit>
-        <update handle="editor"/>
+        <update handle="editor" />
         <reference name="content">
             <block type="banner/adminhtml_banner_edit" name="banner_edit"></block>
         </reference>

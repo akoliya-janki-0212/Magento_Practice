@@ -1,13 +1,22 @@
 <?xml version="1.0"?>
-<layout version="0.1.0">	
+<layout version="0.1.0">
 	<banner_master>
 		<reference name="content">
-			<action method="setTemplate"><template>bannerslider/view.phtml</template></action>
-			<block type="bannerslider/bannerslider" name="bannerslider" template="bannerslider/bannerslider.phtml">
-				<action method="setDisplay"><display>1</display>
+			<action method="setTemplate">
+				<template>bannerslider/view.phtml</template>
+			</action>
+			<block type="bannerslider/bannerslider" name="bannerslider"
+				template="bannerslider/bannerslider.phtml">
+				<action method="setDisplay">
+					<display>1</display>
 				</action>
 			</block>
-	</reference>
+		</reference>
+		<reference name="head">
+			<action method="addJs">
+				<script>ccc_demo/prac.js</script>
+			</action>
+		</reference>
 	</banner_master>
 	<catalog_category_default>
 		<update handle="banner_master"></update>
@@ -18,7 +27,8 @@
 	<cms_index_index>
 		<update handle="banner_master"></update>
 		<reference name="bannerslider">
-			<action method="setDisplay"><display>0</display>
+			<action method="setDisplay">
+				<display>0</display>
 			</action>
 		</reference>
 	</cms_index_index>

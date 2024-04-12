@@ -34,37 +34,37 @@
  */
 class Mage_Cms_Helper_Page extends Mage_Core_Helper_Abstract
 {
-    const XML_PATH_NO_ROUTE_PAGE        = 'web/default/cms_no_route';
-    const XML_PATH_NO_COOKIES_PAGE      = 'web/default/cms_no_cookies';
-    const XML_PATH_HOME_PAGE            = 'web/default/cms_home_page';
+    const XML_PATH_NO_ROUTE_PAGE = 'web/default/cms_no_route';
+    const XML_PATH_NO_COOKIES_PAGE = 'web/default/cms_no_cookies';
+    const XML_PATH_HOME_PAGE = 'web/default/cms_home_page';
 
     /**
-    * Renders CMS page on front end
-    *
-    * Call from controller action
-    *
-    * @param Mage_Core_Controller_Front_Action $action
-    * @param integer $pageId
-    * @return boolean
-    */
+     * Renders CMS page on front end
+     *
+     * Call from controller action
+     *
+     * @param Mage_Core_Controller_Front_Action $action
+     * @param integer $pageId
+     * @return boolean
+     */
     public function renderPage(Mage_Core_Controller_Front_Action $action, $pageId = null)
     {
-        return $this->_renderPage($action, $pageId);
+          return $this->_renderPage($action, $pageId);
     }
 
-   /**
-    * Renders CMS page
-    *
-    * @param Mage_Core_Controller_Front_Action $action
-    * @param integer $pageId
-    * @param bool $renderLayout
-    * @return boolean
-    */
-    protected function _renderPage(Mage_Core_Controller_Varien_Action  $action, $pageId = null, $renderLayout = true)
+    /**
+     * Renders CMS page
+     *
+     * @param Mage_Core_Controller_Front_Action $action
+     * @param integer $pageId
+     * @param bool $renderLayout
+     * @return boolean
+     */
+    protected function _renderPage(Mage_Core_Controller_Varien_Action $action, $pageId = null, $renderLayout = true)
     {
 
         $page = Mage::getSingleton('cms/page');
-        if (!is_null($pageId) && $pageId!==$page->getId()) {
+        if (!is_null($pageId) && $pageId !== $page->getId()) {
             $delimeterPosition = strrpos($pageId, '|');
             if ($delimeterPosition) {
                 $pageId = substr($pageId, 0, $delimeterPosition);
@@ -99,8 +99,8 @@ class Mage_Cms_Helper_Page extends Mage_Core_Helper_Abstract
         $action->addActionLayoutHandles();
         if ($page->getRootTemplate()) {
             $handle = ($page->getCustomRootTemplate()
-                        && $page->getCustomRootTemplate() != 'empty'
-                        && $inRange) ? $page->getCustomRootTemplate() : $page->getRootTemplate();
+                && $page->getCustomRootTemplate() != 'empty'
+                && $inRange) ? $page->getCustomRootTemplate() : $page->getRootTemplate();
             $action->getLayout()->helper('page/layout')->applyHandle($handle);
         }
 

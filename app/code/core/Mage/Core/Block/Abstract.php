@@ -193,6 +193,7 @@ abstract class Mage_Core_Block_Abstract extends Varien_Object
      */
     public function __construct(array $args = array())
     {
+       
         if (!empty($args['core_factory']) && ($args['core_factory'] instanceof Mage_Core_Model_Factory)) {
             $this->_factory = $args['core_factory'];
         }
@@ -338,7 +339,7 @@ abstract class Mage_Core_Block_Abstract extends Varien_Object
      */
     public function setIsAnonymous($flag)
     {
-        $this->_isAnonymous = (bool)$flag;
+        $this->_isAnonymous = (bool) $flag;
         return $this;
     }
 
@@ -517,7 +518,7 @@ abstract class Mage_Core_Block_Abstract extends Varien_Object
             $args = func_get_args();
             $alias = array_shift($args);
             $callback = array_shift($args);
-            $result = (string)array_shift($args);
+            $result = (string) array_shift($args);
             if (!is_array($params)) {
                 $params = $args;
             }
@@ -727,7 +728,7 @@ abstract class Mage_Core_Block_Abstract extends Varien_Object
                 }
             }
 
-            $this->_sortInstructions[$name] = array($siblingName, (bool)$after, false !== $key);
+            $this->_sortInstructions[$name] = array($siblingName, (bool) $after, false !== $key);
         }
 
         return $this;
@@ -943,8 +944,10 @@ abstract class Mage_Core_Block_Abstract extends Varien_Object
             self::$_transportObject = new Varien_Object;
         }
         self::$_transportObject->setHtml($html);
-        Mage::dispatchEvent('core_block_abstract_to_html_after',
-            array('block' => $this, 'transport' => self::$_transportObject));
+        Mage::dispatchEvent(
+            'core_block_abstract_to_html_after',
+            array('block' => $this, 'transport' => self::$_transportObject)
+        );
         $html = self::$_transportObject->getHtml();
 
         return $html;

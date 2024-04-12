@@ -1,6 +1,12 @@
 <?php
 class Ccc_Banner_Block_Adminhtml_Banner_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
+    public function __construct($attributes = array())
+    {
+        parent::__construct($attributes);
+        $this->setTemplate('banner/grid.phtml');
+
+    }
     protected function _prepareCollection()
     {
         // Load your collection
