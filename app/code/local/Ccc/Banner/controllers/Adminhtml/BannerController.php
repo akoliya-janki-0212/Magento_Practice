@@ -20,10 +20,14 @@ class Ccc_Banner_Adminhtml_BannerController extends Mage_Adminhtml_Controller_Ac
      */
     public function indexAction()
     {
+
+        // var_dump($this->getLayout());die;
         $this->_title($this->__('Manage_Banner'));
         $this->_initAction();
         $this->renderLayout();
 
+        // $block = $this->getLayout()->createBlock('ccc_banner/banner');
+        // echo '<pre>';
     }
 
     protected function _isAllowed()

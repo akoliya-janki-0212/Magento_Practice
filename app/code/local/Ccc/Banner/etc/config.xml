@@ -17,19 +17,19 @@
         </routers>
     </admin>
     <adminhtml>
-    <layout>
-        <updates>
-            <ccc_banner>
-                <file>ccc_banner.xml</file>
-            </ccc_banner>
-        </updates>
-    </layout>
-</adminhtml>
+        <layout>
+            <updates>
+                <ccc_banner>
+                    <file>ccc_banner.xml</file>
+                </ccc_banner>
+            </updates>
+        </layout>
+    </adminhtml>
     <global>
         <blocks>
-            <banner>
+            <ccc_banner>
                 <class>Ccc_Banner_Block</class>
-            </banner>
+            </ccc_banner>
         </blocks>
 
         <models>

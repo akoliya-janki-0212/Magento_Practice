@@ -30,7 +30,7 @@
     <!-- Catalog Price Rule -->
     <adminhtml_banner_index>
         <reference name="content">
-            <block type="banner/adminhtml_banner" name="banner" />
+            <block type="ccc_banner/adminhtml_banner" name="banner" />
         </reference>
         <reference name="head">
             <action method="addJs">
@@ -45,7 +45,7 @@
     <adminhtml_banner_edit>
         <update handle="editor" />
         <reference name="content">
-            <block type="banner/adminhtml_banner_edit" name="banner_edit"></block>
+            <block type="ccc_banner/adminhtml_banner_edit" name="banner_edit"></block>
         </reference>
     </adminhtml_banner_edit>
 </layout>
