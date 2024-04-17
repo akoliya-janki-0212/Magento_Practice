@@ -18,16 +18,23 @@ $jsonData = $this->getSalesData();
             defaultColDef: {
                 editable: true,
                 filter: true,
+                floatingFilter: true,
             },
             columnDefs: [
-                { headerName: "Order Number", field: "Order_Number", minWidth: 170, filter: true, floatingFilter: true },
-                { headerName: "Billing Address", field: "Billing_Address", minWidth: 500, filter: true, floatingFilter: true },
-                { headerName: "Shipping Address", field: "Shipping_Address", minWidth: 500, filter: true, floatingFilter: true },
-                { headerName: "Tax", field: "Tax", filter: true, floatingFilter: true },
-                { headerName: "Discount", field: "Discount", filter: true, floatingFilter: true },
-                { headerName: "Order Total", field: "Order_total", filter: true, floatingFilter: true },
-                { headerName: "Payment Method", field: "Payment_Method", filter: true, floatingFilter: true },
-            ]
+                { headerName: "Order Number", field: "Order_Number", minWidth: 170 },
+                { headerName: "Billing Address", field: "Billing_Address", minWidth: 500 },
+                { headerName: "Shipping Address", field: "Shipping_Address", minWidth: 500 },
+                { headerName: "Tax", field: "Tax" },
+                { headerName: "Discount", field: "Discount" },
+                { headerName: "Order Total", field: "Order_total" },
+                { headerName: "Payment Method", field: "Payment_Method" },
+            ],
+            // enable pagination
+            pagination: true,
+            // 20 rows per page (default is 100)
+            paginationPageSize: 20,
+            // fetch 10 rows per block as page size is 10 (default is 100)
+            cacheBlockSize: 10,
         };
         const myGridElement = document.querySelector('#myGrid');
         const myGrid = new agGrid.Grid(myGridElement, gridOptions);

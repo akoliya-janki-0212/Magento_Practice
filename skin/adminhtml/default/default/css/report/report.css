@@ -1,0 +1,82 @@
+/* Basic reset for table styling */
+.myGrid table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Ensures borders between cells are shared */
+    background-color: white;
+    color: #333;
+    font-family: Arial, sans-serif;
+    min-width: 800px;
+    /* Ensures the table does not get too squished */
+}
+
+/* Styling for the table header */
+.myGrid th {
+    background-color: #f4f4f4;
+    color: #370c0c;
+    padding: 8px 15px;
+    text-align: left;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+/* Styling for each table cell */
+.myGrid td {
+    padding: 8px 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Hover effect for rows */
+.myGrid tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Header cells when hovered */
+.myGrid th:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
+}
+
+.myGrid {
+    overflow-x: auto;
+    /* Enables horizontal scrolling */
+    margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+
+    /* Hide table headers */
+    .myGrid thead,
+    .myGrid th {
+        display: none;
+    }
+
+    /* Make table behave like a grid of cards */
+    .myGrid td {
+        display: block;
+        padding: 10px;
+        text-align: right;
+        position: relative;
+        border-bottom: 1px solid #ccc;
+    }
+
+    /* Add a pseudo-element for labels from headers */
+    .myGrid td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        text-align: left;
+        font-weight: bold;
+    }
+}
+
+@media (max-width: 800px) {
+    .myGrid table {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 400px) {
+    .myGrid table {
+        font-size: 12px;
+    }
+}

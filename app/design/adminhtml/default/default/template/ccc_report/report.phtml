@@ -1,0 +1,8 @@
+<div id="myGrid"></div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Instantiate and render the grid
+        const grid = new MyGrid(<?php echo $this->getSalesData(); ?>, 'myGrid');
+        grid.renderGrid();
+    });
+</script>

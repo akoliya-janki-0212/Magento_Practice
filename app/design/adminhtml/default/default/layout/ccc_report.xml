@@ -28,12 +28,25 @@
 
 <layout>
     <adminhtml_report_index>
-        <reference name="content">
+        <!-- <reference name="content">
             <block type="ccc_report/adminhtml_report" name="report" template='ccc_report/grid.phtml' />
         </reference>
         <reference name="head">
             <action method="addJs">
                 <script>report/report.js</script>
+            </action>
+        </reference> -->
+        <reference name="content">
+            <block type="ccc_report/adminhtml_report" name="report"
+                template='ccc_report/report.phtml' />
+        </reference>
+        <reference name="head">
+            <action method="addJs">
+                <script>report/custom_report.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/report/report.css</name>
             </action>
         </reference>
     </adminhtml_report_index>
