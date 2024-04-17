@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ccc_Report>
+            <version>0.1.0</version>
+        </Ccc_Report>
+    </modules>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Ccc_Report before="Mage_Adminhtml">Ccc_Report_Adminhtml</Ccc_Report>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <ccc_Report>
+                    <file>ccc_report.xml</file>
+                </ccc_Report>
+            </updates>
+        </layout>
+    </adminhtml>
+    <global>
+        <blocks>
+            <ccc_report>
+                <class>Ccc_Report_Block</class>
+            </ccc_report>
+        </blocks>
+        <helpers>
+            <report>
+                <class>Ccc_Report_Helper</class>
+            </report>
+        </helpers>
+    </global>
+</config>

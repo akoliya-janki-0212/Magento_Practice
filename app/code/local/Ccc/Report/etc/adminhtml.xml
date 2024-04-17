@@ -1,0 +1,9 @@
+<config>
+    <menu>
+        <ccc_report translate="title" module="report">
+            <title>Custom Report</title>
+            <action>adminhtml/report/index</action>
+            <sort_order>100</sort_order>
+        </ccc_report>
+    </menu>
+</config>

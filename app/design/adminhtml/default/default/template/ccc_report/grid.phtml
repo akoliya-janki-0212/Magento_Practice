@@ -1,0 +1,42 @@
+<!-- Includes all JS & CSS for AG Grid -->
+<?php
+$jsonData = $this->getSalesData();
+?>
+<input type="checkbox" id="orderNumberCheckbox" checked data-column="Order_Number">Order Number
+<input type="checkbox" id="billingAddressCheckbox" checked data-column="Billing_Address">Billing Address
+<input type="checkbox" id="shippingAddressCheckbox" checked data-column="Shipping_Address">Shipping Address
+<input type="checkbox" id="taxCheckbox" checked data-column="Tax">Tax
+<input type="checkbox" id="discountCheckbox" checked data-column="Discount">Discount
+<input type="checkbox" id="orderTotalCheckbox" checked data-column="Order_total">Order Total
+<input type="checkbox" id="paymentMethodCheckbox" checked data-column="Payment_Method">Payment Method
+<div id="myGrid" class="ag-theme-quartz" style="height: 500px"></div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const gridOptions = {
+            rowData: <?php echo $this->getSalesData() ?>,
+            rowSelection: "multiple",
+            defaultColDef: {
+                editable: true,
+                filter: true,
+            },
+            columnDefs: [
+                { headerName: "Order Number", field: "Order_Number", minWidth: 170, filter: true, floatingFilter: true },
+                { headerName: "Billing Address", field: "Billing_Address", minWidth: 500, filter: true, floatingFilter: true },
+                { headerName: "Shipping Address", field: "Shipping_Address", minWidth: 500, filter: true, floatingFilter: true },
+                { headerName: "Tax", field: "Tax", filter: true, floatingFilter: true },
+                { headerName: "Discount", field: "Discount", filter: true, floatingFilter: true },
+                { headerName: "Order Total", field: "Order_total", filter: true, floatingFilter: true },
+                { headerName: "Payment Method", field: "Payment_Method", filter: true, floatingFilter: true },
+            ]
+        };
+        const myGridElement = document.querySelector('#myGrid');
+        const myGrid = new agGrid.Grid(myGridElement, gridOptions);
+        const columnCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+        columnCheckboxes.forEach(function (checkbox) {
+            const column = checkbox.getAttribute('data-column');
+            checkbox.addEventListener('change', function () {
+                gridOptions.api.setColumnsVisible([column], this.checked);
+            });
+        });
+    });
+</script>
