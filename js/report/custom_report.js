@@ -22,6 +22,7 @@ class MyGrid {
         this.filters = {}; // Initialize filters 
         this.createHeaders();
         this.initVirtualScroll();
+        this.addCheckboxListeners();  // Set up the checkbox listeners after the grid is created
     }
 
     createHeaders() {
@@ -73,7 +74,6 @@ class MyGrid {
 
         for (let i = startIndex; i < Math.min(endIndex, this.totalRows); i++) {
             const rowElement = this.createRowElement(this.data[i], i);
-            console.log(rowElement);
             this.tbody.appendChild(rowElement);
         }
     }
@@ -157,6 +157,33 @@ class MyGrid {
         });
         this.renderGrid(0);
     }
+    addCheckboxListeners() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][data-column]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', (event) => {
+                const column = event.target.getAttribute('data-column');
+                const isChecked = event.target.checked;
+                this.setColumnVisibility(column, isChecked);
+            });
+        });
+    }
+    setColumnVisibility(columnName, isVisible) {
+        const columnIndex = this.columnDefs.findIndex(col => col.field === columnName);
+        if (columnIndex !== -1) {
+            this.columnDefs[columnIndex].visible = isVisible;  // Update visibility in the columnDefs
+            const headerCells = this.thead.querySelectorAll('th');
+            const bodyCells = this.tbody.querySelectorAll(`td:nth-child(${columnIndex + 1})`);
+
+            if (headerCells[columnIndex]) {
+                headerCells[columnIndex].style.display = isVisible ? '' : 'none';
+            }
+
+            bodyCells.forEach(cell => {
+                cell.style.display = isVisible ? '' : 'none';
+            });
+        }
+    }
+
     injectStyles() {
         const style = document.createElement('style');
         style.type = 'text/css';
