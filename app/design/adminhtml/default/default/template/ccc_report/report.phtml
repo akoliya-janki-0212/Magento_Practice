@@ -1,4 +1,5 @@
 <div id="myGrid"></div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const gridOptions = {
@@ -15,6 +16,6 @@
         };
         const myGridElement = document.querySelector('#myGrid');
         const grid = new MyGrid(myGridElement, gridOptions);
-        grid.renderGrid();
+        grid.renderGrid(0);
     });
 </script>

@@ -5,9 +5,13 @@ class MyGrid {
         this.originalData = [...this.data]; // Ensure original data is stored for filtering
         this.columnDefs = gridOptions.columnDefs;
         this.container = gridElement;
-        this.table = document.createElement('table');
-        this.table.style.cssText = 'width: 100%; border-collapse: collapse;'; // Use cssText for multiple styles
+        this.rowHeight = 30; // Default row height
+        this.bufferMultiplier = 1000; // Number of screens worth of buffer rows
+        this.totalRows = this.data.length;
 
+        // Create and style the table
+        this.table = document.createElement('table');
+        this.table.style.cssText = 'width: 100%; border-collapse: collapse;';
         this.thead = document.createElement('thead');
         this.tbody = document.createElement('tbody');
         this.table.appendChild(this.thead);
@@ -17,7 +21,7 @@ class MyGrid {
         this.currentSort = { column: null, direction: '' };
         this.filters = {}; // Initialize filters 
         this.createHeaders();
-        this.renderGrid();
+        this.initVirtualScroll();
     }
 
     createHeaders() {
@@ -25,7 +29,7 @@ class MyGrid {
         const headerRow = document.createElement('tr');
         this.columnDefs.forEach((colDef, index) => {
             const th = document.createElement('th');
-            th.innerHTML = `${colDef.headerName} <span class='sort-icon'>&#x2B07;</span>`; // Down arrow as default
+            th.innerHTML = `${colDef.headerName} <span class='sort-icon'>&#x25B2;</span>`; // Down arrow as default
 
             th.style.minWidth = `${colDef.minWidth || 100}px`; // Default min-width
             th.setAttribute('draggable', true);
@@ -47,15 +51,36 @@ class MyGrid {
         this.thead.appendChild(filterRow);
     }
 
-    renderGrid() {
-        this.tbody.innerHTML = ''; // Clear existing rows
-        this.data.forEach(rowData => {
-            this.tbody.appendChild(this.createRowElement(rowData));
+    initVirtualScroll() {
+        this.container.style.height = `${window.innerHeight}px`;
+        this.container.style.overflowY = 'scroll';
+        this.container.style.position = 'relative';
+        this.buffer = window.innerHeight * this.bufferMultiplier;
+        this.visibleRows = Math.ceil(this.buffer / this.rowHeight);
+        this.attachEvents();
+        this.renderGrid(0);
+    }
+    attachEvents() {
+        this.container.addEventListener('scroll', () => {
+            const scrollTop = this.container.scrollTop;
+            const startIndex = Math.floor(scrollTop / this.rowHeight);
+            this.renderGrid(startIndex);
         });
     }
+    renderGrid(startIndex) {
+        const endIndex = startIndex + this.visibleRows;
+        this.tbody.innerHTML = ''; // Clear previous rows
 
-    createRowElement(rowData) {
+        for (let i = startIndex; i < Math.min(endIndex, this.totalRows); i++) {
+            const rowElement = this.createRowElement(this.data[i], i);
+            console.log(rowElement);
+            this.tbody.appendChild(rowElement);
+        }
+    }
+
+    createRowElement(rowData, index) {
         const tr = document.createElement('tr');
+        tr.style.height = `${this.rowHeight}px`; // Set the row height
         this.columnDefs.forEach(colDef => {
             const td = document.createElement('td');
             td.textContent = rowData[colDef.field];
@@ -101,7 +126,7 @@ class MyGrid {
     updateSortIndicator() {
         // First, reset all sort icons to indicate an unsorted state
         Array.from(this.thead.querySelectorAll('.sort-icon')).forEach(icon => {
-            icon.innerHTML = '&#x2B07;'; // Use &#x2B07; or any other preferred icon for unsorted state
+            icon.innerHTML = '&#x25B2;'; // Use &#x25B2; or any other preferred icon for unsorted state
         });
 
         // Identify the column that has been sorted and update its sort icon accordingly
@@ -130,7 +155,7 @@ class MyGrid {
                 return this.filters[field] === '' || item[field].toString().toLowerCase().includes(this.filters[field]);
             });
         });
-        this.renderGrid();
+        this.renderGrid(0);
     }
     injectStyles() {
         const style = document.createElement('style');
@@ -152,8 +177,15 @@ class MyGrid {
             th:active {
                 cursor: grabbing;
             }
-            .sort-icon {
-                margin-left: 5px;
+            /* Hide the sort icon by default */
+            th .sort-icon {
+                visibility: hidden;
+                margin-left: 5px;  /* Adjust spacing as needed */
+            }
+            
+            /* Show the sort icon when the header is hovered */
+            th:hover .sort-icon {
+                visibility: visible;
             }
             input[type="text"] {
                 box-sizing: border-box;
