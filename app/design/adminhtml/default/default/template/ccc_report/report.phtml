@@ -1,8 +1,20 @@
 <div id="myGrid"></div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Instantiate and render the grid
-        const grid = new MyGrid(<?php echo $this->getSalesData(); ?>, 'myGrid');
+        const gridOptions = {
+            rowData: <?php echo $this->getSalesData(); ?>,
+            columnDefs: [
+                { headerName: "Order Number", field: "Order_Number", minWidth: 170 },
+                { headerName: "Billing Address", field: "Billing_Address", minWidth: 500 },
+                { headerName: "Shipping Address", field: "Shipping_Address", minWidth: 500 },
+                { headerName: "Tax", field: "Tax" },
+                { headerName: "Discount", field: "Discount" },
+                { headerName: "Order Total", field: "Order_total" },
+                { headerName: "Payment Method", field: "Payment_Method" },
+            ]
+        };
+        const myGridElement = document.querySelector('#myGrid');
+        const grid = new MyGrid(myGridElement, gridOptions);
         grid.renderGrid();
     });
 </script>
