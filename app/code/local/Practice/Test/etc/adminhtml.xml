@@ -1,0 +1,9 @@
+<config>
+    <menu>
+        <practice_test translate="title" module="practice_test">
+            <title>Test</title>
+            <action>adminhtml/test/index</action>
+            <sort_order>100</sort_order>
+        </practice_test>
+    </menu>
+</config>

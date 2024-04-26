@@ -8,7 +8,7 @@ class Ccc_Report_Block_Adminhtml_Report extends Mage_Adminhtml_Block_Widget_Grid
         $this->_headerText = Mage::helper('report')->__('Manage Reports');
         parent::__construct();
     }
-     public function getSalesData()
+     /* public function getSalesData()
      {
         $connection = Mage::getSingleton('core/resource')->getConnection('core_setup');
          $query = "SELECT 
@@ -67,7 +67,7 @@ class Ccc_Report_Block_Adminhtml_Report extends Mage_Adminhtml_Block_Widget_Grid
 
          // Convert results to JSON
          return $this->getJson($collection->getData());
-     }
+     } */
      public function getJson($data)
      {
          return json_encode($data);
