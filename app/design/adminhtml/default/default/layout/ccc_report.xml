@@ -39,9 +39,11 @@
         <reference name="content">
             <block type="ccc_report/adminhtml_report" name="report"
                 template='ccc_report/report.phtml' />
+            <!--  template='ccc_report/grid.phtml' /> -->
         </reference>
         <reference name="head">
             <action method="addJs">
+                <!-- <script>report/report.js</script> -->
                 <script>report/custom_report.js</script>
             </action>
             <action method="addItem">

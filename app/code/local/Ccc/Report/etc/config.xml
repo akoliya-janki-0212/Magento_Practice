@@ -31,10 +31,56 @@
                 <class>Ccc_Report_Block</class>
             </ccc_report>
         </blocks>
+        <models>
+            <ccc_report>
+                <class>Ccc_Report_Model</class>
+                <resourceModel>ccc_report_resource</resourceModel>
+            </ccc_report>
+            <ccc_report_resource>
+                <class>Ccc_Report_Model_Resource</class>
+            </ccc_report_resource>
+        </models>
         <helpers>
             <report>
                 <class>Ccc_Report_Helper</class>
             </report>
         </helpers>
+
     </global>
+    <ccc_report_columns>
+        <sales_flat_order>
+            <increment_id>
+                <label>Order Number</label>
+                <default>true</default>
+            </increment_id>
+            <tax_amount>
+                <label>Tax</label>
+                <default>true</default>
+            </tax_amount>
+            <discount_amount>
+                <label>Discount</label>
+                <default>true</default>
+            </discount_amount>
+            <grand_total>
+                <label>Grand Total</label>
+            </grand_total>
+        </sales_flat_order>
+    </ccc_report_columns>
+
+    <ccc_report_columns>
+        <sales_flat_order_address>
+            <street>
+                <label>street</label>
+                <join>sales_flat_order.billing_address_id = sales_flat_order_address.entity_id</join>
+            </street>
+        </sales_flat_order_address>
+    </ccc_report_columns>
+    <ccc_report_columns>
+        <sales_flat_order_payment>
+            <method>
+                <join>sales_flat_order.entity_id = sales_flat_order_payment.parent_id</join>
+                <label>Payment Method</label>
+            </method>
+        </sales_flat_order_payment>
+    </ccc_report_columns>
 </config>

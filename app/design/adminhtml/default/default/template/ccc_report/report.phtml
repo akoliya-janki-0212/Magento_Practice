@@ -1,29 +1,72 @@
-<input type="checkbox" id="orderNumberCheckbox" checked data-column="Order_Number">Order Number
-<input type="checkbox" id="billingAddressCheckbox" checked data-column="Billing_Address">Billing Address
-<input type="checkbox" id="shippingAddressCheckbox" checked data-column="Shipping_Address">Shipping Address
-<input type="checkbox" id="taxCheckbox" checked data-column="Tax">Tax
-<input type="checkbox" id="discountCheckbox" checked data-column="Discount">Discount
-<input type="checkbox" id="orderTotalCheckbox" checked data-column="Order_total">Order Total
-<input type="checkbox" id="paymentMethodCheckbox" checked data-column="Payment_Method">Payment Method
+<?php $collection = $this->getCollectionData();
+?>
 
-<div id="myGrid"></div>
-
+<vdiv id="checkboxesContainer" style="margin:1rem 0">
+    <?php foreach ($this->getLabelsData() as $columnName => $label): ?>
+        <input type="checkbox" id="<?php echo $columnName; ?>Checkbox" <?php
+           foreach ($this->getDefaultColumns() as $key => $column) {
+               if ($column == $columnName) {
+                   echo 'checked';
+               }
+           }
+           ?>  data-column="<?php echo $columnName; ?>"><?php echo $label; ?>
+    <?php endforeach; ?>
+</vdiv>
+<div id="myGrid" class='grid-container1'>
+</div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const labelData = <?php echo json_encode($this->getLabelsData()); ?>;
+
+        const colDefs = [];
+        Object.keys(labelData).forEach(columnName => {
+            colDefs.push({
+                headerName: labelData[columnName],
+                field: columnName
+            });
+        });
         const gridOptions = {
-            rowData: <?php echo $this->getSalesData(); ?>,
-            columnDefs: [
-                { headerName: "Order Number", field: "Order_Number", minWidth: 170 },
-                { headerName: "Billing Address", field: "Billing_Address", minWidth: 500 },
-                { headerName: "Shipping Address", field: "Shipping_Address", minWidth: 500 },
-                { headerName: "Tax", field: "Tax" },
-                { headerName: "Discount", field: "Discount" },
-                { headerName: "Order Total", field: "Order_total" },
-                { headerName: "Payment Method", field: "Payment_Method" },
-            ]
+            rowData: <?php echo $collection ?>,
+            columnDefs:
+                colDefs,
         };
         const myGridElement = document.querySelector('#myGrid');
         const grid = new MyGrid(myGridElement, gridOptions);
         grid.renderGrid(0);
+
+        function sendAjaxRequest(checkedColumns) {
+            var formData = new FormData();
+            formData.append('checkedData', checkedColumns);
+            formData.append('form_key', '<?php echo $this->getFormKey() ?>');
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    const mergedData = concatenateJSONArrays(grid.getRowData(), xhr.responseText);
+                    grid.setRowData(mergedData);
+                }
+            };
+            const url = '<?php echo $this->getUrl('*/*/update') ?>';
+            xhr.open('POST', url);
+            xhr.send(formData);
+        }
+        function concatenateJSONArrays(originalJson, newJson) {
+            newJson = JSON.parse(newJson);
+            const concatenateArray = [];
+            for (i = 0; i <= originalJson.length; i++) {
+                concatenateArray.push(Object.assign({}, originalJson[i], newJson[i]));
+            }
+            return concatenateArray;
+        }
+        let checkedColumnsRecords = [];
+        const checkboxes = document.querySelectorAll('#checkboxesContainer input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                const column = this.getAttribute('data-column');
+                if (this.checked && !checkedColumnsRecords.includes(column)) {
+                    checkedColumnsRecords.push(column);
+                    sendAjaxRequest(column);
+                }
+            });
+        });
     });
 </script>

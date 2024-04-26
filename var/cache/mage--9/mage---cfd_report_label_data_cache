@@ -1,0 +1,1 @@
+{"sales_flat_order":{"increment_id":{"0":"Order Number"},"tax_amount":{"0":"Tax"},"discount_amount":{"0":"Discount"},"grand_total":{"0":"Grand Total"}},"sales_flat_order_address":{"street":{"0":"street"}},"sales_flat_order_payment":{"method":{"0":"Payment Method"}}}

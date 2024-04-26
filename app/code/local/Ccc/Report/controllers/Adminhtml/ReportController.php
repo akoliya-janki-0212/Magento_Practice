@@ -31,4 +31,24 @@ class Ccc_Report_Adminhtml_ReportController extends Mage_Adminhtml_Controller_Ac
     }
 
 
+    // Call the function to set default=true for specified columns
+
+    public function updateAction()
+    {
+        $checkedColumns = $this->getRequest()->getPost('checkedData');
+        $reportHelper = Mage::helper('report/report');
+        $XMlReadedData = $reportHelper->getFieldsetData('ccc_report_columns');
+        $reportModel = Mage::getModel('ccc_report/report');
+        $reportModel->setTempColumns($checkedColumns);
+        $responseData = $reportHelper->getJsonData(
+            $reportModel->getConnection(
+                $reportModel->prepareQuery($XMlReadedData)
+            )
+        );
+
+        // Return response as JSON
+        $this->getResponse()->setHeader('Content-Type', 'application/json');
+        $this->getResponse()->setBody($responseData);
+    }
+
 }
